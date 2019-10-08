@@ -25,14 +25,10 @@ class BottomState {
   GarbageResultBean result;
   List<String> historySearchKey;
 
-  BottomState() {
-    type = BottomType.SEARCH;
-    searchKey = "";
-    historySearchKey = List<String>();
-    get().then((list) {
-      historySearchKey = list;
-    });
-  }
+  BottomState()
+      : type = BottomType.SEARCH,
+        searchKey = "",
+        historySearchKey = List<String>();
 }
 
 class TopState {
@@ -42,6 +38,7 @@ class TopState {
 }
 
 enum ReduxAction {
+  INIT_FINISH,
   SearchSuccess,
   SearchError,
   CHIP_CLICK,
@@ -49,7 +46,8 @@ enum ReduxAction {
 
 MainPageState getReduce(MainPageState state, action) {
   if (action == ReduxAction.SearchSuccess) {
-    if (!state.bottomState.historySearchKey.contains(state.bottomState.searchKey)) {
+    if (!state.bottomState.historySearchKey
+        .contains(state.bottomState.searchKey)) {
       if (state.bottomState.historySearchKey.length > 8) {
         state.bottomState.historySearchKey.removeAt(0);
       }
@@ -60,7 +58,7 @@ MainPageState getReduce(MainPageState state, action) {
   return state;
 }
 
-save(List<String> historySearchKey) async{
+save(List<String> historySearchKey) async {
   String history = "";
 
   for (var item in historySearchKey) {

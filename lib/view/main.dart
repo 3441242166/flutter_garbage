@@ -9,6 +9,11 @@ void main() {
   final store =
       Store<MainPageState>(getReduce, initialState: MainPageState.initState());
 
+  get().then((value) {
+    store.state.bottomState.historySearchKey.addAll(value);
+    store.dispatch(ReduxAction.INIT_FINISH);
+  });
+
   runApp(MyApp(store));
 }
 
