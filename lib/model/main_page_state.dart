@@ -45,17 +45,32 @@ enum ReduxAction {
 }
 
 MainPageState getReduce(MainPageState state, action) {
-  if (action == ReduxAction.SearchSuccess) {
-    if (!state.bottomState.historySearchKey
-        .contains(state.bottomState.searchKey)) {
-      if (state.bottomState.historySearchKey.length > 8) {
-        state.bottomState.historySearchKey.removeAt(0);
-      }
-      state.bottomState.historySearchKey.add(state.bottomState.searchKey);
-      save(state.bottomState.historySearchKey);
-    }
+  switch (action) {
+    case ReduxAction.SearchSuccess:
+      searchAction(state);
+      break;
+    case ReduxAction.CHIP_CLICK:
+      break;
+    case ReduxAction.CHIP_CLICK:
+      break;
+    case ReduxAction.CHIP_CLICK:
+      break;
   }
   return state;
+}
+
+searchAction(MainPageState state) {
+  if (!state.bottomState.historySearchKey
+      .contains(state.bottomState.searchKey)) {
+    if (state.bottomState.historySearchKey.length > 8) {
+      state.bottomState.historySearchKey.removeAt(0);
+    }
+    state.bottomState.historySearchKey.add(state.bottomState.searchKey);
+    save(state.bottomState.historySearchKey);
+  } else {
+    state.bottomState.historySearchKey.remove(state.bottomState.searchKey);
+    state.bottomState.historySearchKey.insert(0, state.bottomState.searchKey);
+  }
 }
 
 save(List<String> historySearchKey) async {

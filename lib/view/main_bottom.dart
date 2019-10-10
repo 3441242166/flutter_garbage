@@ -120,7 +120,6 @@ class _MainSearchBottomState extends State<MainSearchBottom> {
   }
 
   // http://www.mxnzp.com/api/rubbish/type?name=西瓜
-  //http://www.mxnzp.com/api
   getGarbageResponse(String searchKey, Store<MainPageState> store) async {
     try {
       final response = await http
@@ -138,8 +137,7 @@ class _MainSearchBottomState extends State<MainSearchBottom> {
       }
     } catch (thr) {
       print(thr);
-      Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text("网络错误，请稍后再试")));
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text("网络错误，请稍后再试")));
     }
   }
 
